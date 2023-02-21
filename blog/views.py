@@ -1,4 +1,5 @@
 import logging
+from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 
@@ -20,8 +21,9 @@ def index(request):
 
 
 def post_table(request):
-  return render(request, "blog/post-table.html")
-
+  return render(
+      request, "blog/post-table.html", {"post_list_url": reverse("post-list")}
+  )
 
 def post_detail(request, slug):
   post = get_object_or_404(Post, slug=slug)
